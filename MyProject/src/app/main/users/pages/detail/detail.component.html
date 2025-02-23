@@ -1,0 +1,21 @@
+<div class="main">
+    <div *ngIf="user" class="container">
+        <div class="profile">
+            <div class="head">
+                <img [src]="user.imgUrl" alt="User's Image">
+                <h2>{{user.firstname | titlecase }} {{ user.lastname | titlecase}}</h2>
+            </div>
+            <div class="body">
+                <h3>Personal Information</h3>
+                <div class="info">
+                    <p>Age: {{user.age}} years old</p>
+                    <p>Gender: {{user.gender}}</p>
+                    <p>Phone Number: {{user.phone}}</p>
+                    <p>Occupation: {{user.occupation}}</p>
+                    <p>Address: {{user.address}}</p>
+                    <p>Interests: {{user.interest}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
