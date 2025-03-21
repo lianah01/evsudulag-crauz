@@ -19,3 +19,11 @@
   mat-card-title {
     margin-bottom: 16px;
   }
+
+  .error {
+    margin-top: -16px;
+    padding: 16px;
+    background-color: rgb(141, 16, 16);
+    color: white;
+    text-align: center;
+  }

@@ -1,6 +1,7 @@
 <div class="login-container">
   <mat-card class="login-card">
     <mat-card-title>Access Your Account</mat-card-title>
+    <p class="error" *ngIf="loginError">{{loginError}}</p>
     <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
       <mat-form-field appearance="outline" class="full-width">
         <mat-label>Username</mat-label>

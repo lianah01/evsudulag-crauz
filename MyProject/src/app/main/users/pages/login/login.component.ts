@@ -19,16 +19,40 @@ export class LoginComponent {
 
   constructor(private userService: UserService, private router: Router){}
 
-  loginError: boolean = false;
+  loginError = '';
   public onLogin() {
-    const { username, password } = this.loginForm.value;
-    if(this.userService.login(username, password)){
-      this.loginError = false;
-      this.router.navigate(['/main/detail']);
-    } else {
-      this.loginError = true;
-      console.log('error');
+
+    if (this.loginForm.invalid) {
+      this.loginError = 'Please enter valid credentials.';
+      return;
     }
+
+    this.userService.userLogin(this.loginForm.value).subscribe({
+      next: (data) => {
+        if (data?.user) {
+          this.router.navigate(['/main/dashboard']);
+          this.loginError = '';
+        }
+      },
+      error: (err) => {
+        if (err.status === 401) {
+          this.loginError = 'Invalid username or password.';
+        } else if(err.status === 404){
+          this.loginError = 'User not found'
+        } else {
+          this.loginError = 'Something went wrong. Please try again.';
+        }
+      }
+    });
+
+    // const { username, password } = this.loginForm.value;
+    // if(this.userService.login(username, password)){
+    //   this.loginError = false;
+    //   this.router.navigate(['/main/detail']);
+    // } else {
+    //   this.loginError = true;
+    //   console.log('error');
+    // }
   }
 
   get username(){
